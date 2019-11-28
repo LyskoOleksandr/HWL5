@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        section {
+            width: 450px;
+            min-height: 150px;
+            border: 5px solid;
+            border-image: linear-gradient(45deg, #aa1167, #fb996b);
+            border-image-slice: 1;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        button {
+            width: 150px;
+            height: 50px;
+            font-size: 24px;
+            margin: 10px auto;
+            background: transparent;
+            color: #aa1167;
+            border: 3px solid #aa1167;
+        }
+
+        input {
+            width: 400px;
+            height: 50px;
+            font-size: 25px;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        h5 {
+            font-size: 30px;
+            color: gray;
+        }
+
+        li {
+            font-size: 22px;
+        }
+
+        .it-red {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <input type="text" placeholder="Your TODO">
+        <button>Add Task</button>
+        <button id="vip">VIP Task</button>
+    </section>
+    <h5>List Of Tasks</h5>
+    <section>
+        <ul>
+        </ul>
+    </section>
+    <script>
+        const inp = document.querySelector('input');
+        const btn = document.querySelector('button');
+        const btnVip = document.getElementById('vip')
+        const list = document.querySelector('ul');
+        function getInputValue(inp) {
+            let myValue = '';
+            if (inp !== '') {
+                myValue = inp.value;
+                return myValue;
+            }
+        }
+        function createElementWithText(elementName, text) {
+            let elem = document.createElement(elementName);
+            elem.innerHTML = text;
+            return elem;
+        }
+        function appendChildToDo(parent, child) {
+            parent.appendChild(child);
+        }
+        btn.addEventListener('click', () => {
+            if (getInputValue(inp)) {
+                let child = createElementWithText('li', getInputValue(inp));
+                appendChildToDo(list, child);
+            }
+        })
+        btnVip.addEventListener('click', () => {
+            if (getInputValue(inp)) {
+                let child = createElementWithText('li', getInputValue(inp));
+                let firstE = list.firstElementChild;
+                list.insertBefore(child, firstE);
+                child.classList.add('it-red');
+            }
+        })
+    </script>
+</body>
+
+</html>
